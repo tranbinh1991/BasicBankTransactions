@@ -39,13 +39,25 @@ public class RegistrationController {
     }
 
     public void registerNewUser(String name, String password) {
-        User user = new User(name, password);
-        users.getListOfUsers().add(user);
-        System.out.println("------------");
-        System.out.println("Successful registration");
-        System.out.println("------------");
-        WelcomePageController welcomePageController = WelcomePageController.getInstance();
-        welcomePageController.initView();
+        boolean usernameAlreadyExists = false;
+        
+        for (User user : users.getListOfUsers()) {
+            if (user.getName().equals(name)){
+                usernameAlreadyExists = true;
+            }
+        }
+        if (usernameAlreadyExists==true) {
+            System.out.println("This username is already taken");
+            view.showPage();
+        } else {
+            User user = new User(name, password);
+            users.getListOfUsers().add(user);
+            System.out.println("------------");
+            System.out.println("Successful registration");
+            System.out.println("------------");
+            WelcomePageController welcomePageController = WelcomePageController.getInstance();
+            welcomePageController.initView();
+        }
     }
 
 }

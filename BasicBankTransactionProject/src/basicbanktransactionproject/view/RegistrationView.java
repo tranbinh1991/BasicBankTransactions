@@ -30,18 +30,16 @@ public class RegistrationView implements IView{
         
         System.out.println("------------");
         System.out.println("Registration");
-        System.out.println("Please input your name first press enter then your password");
+        
         System.out.println("------------");
 
         try {
+            System.out.println("Please input your name");
             Scanner sc = new Scanner(System.in);
             String userName = sc.nextLine();
+            System.out.println("Please input your password");
             String password = sc.nextLine();
             this.registrationController.registerNewUser(userName, password);
-
-            
-           
-
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
             showPage();
