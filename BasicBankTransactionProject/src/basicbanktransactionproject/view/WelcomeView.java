@@ -33,7 +33,6 @@ public class WelcomeView implements IView{
         System.out.println("2. Log in");
         System.out.println("3. Exit");
         System.out.println("------------");
-
         System.out.println("Please choose a option: ");
 
         try {
