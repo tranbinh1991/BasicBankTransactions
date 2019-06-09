@@ -9,19 +9,21 @@ package basicbanktransactionproject.model;
  *
  * @author Binh
  */
-public class InsufficientFundsException extends Exception {
-
+public class NegativeAmountException extends Exception{
+    
     private double amount;
 
-    public InsufficientFundsException(double amount) {
+    public NegativeAmountException(double amount) {
+        
         this.amount = amount;
     }
     
-    public void message(){
-        System.out.println("You do not have enough money on your bank account");
+    public void message (){
+        System.out.println("You cannot enter negative amount: " + amount);
     }
 
     public double getAmount() {
         return amount;
     }
+    
 }

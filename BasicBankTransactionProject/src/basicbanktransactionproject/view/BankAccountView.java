@@ -130,7 +130,7 @@ public class BankAccountView implements IView {
 
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showPage();
+            showHistoryOptions();
         }
 
     }
@@ -185,7 +185,6 @@ public class BankAccountView implements IView {
             int lowerLimitDay = sc.nextInt();
             System.out.println("Upper limit");
             System.out.println("Year");
-
             int upperLimitYear = sc.nextInt();
             System.out.println("Month");
             int upperLimitMonth = sc.nextInt();
