@@ -133,7 +133,7 @@ public class BankAccountController {
         if (filteredTransactions == null) {
             filteredTransactions = this.user.getAccount().getListofTransactions();
         } else {
-            System.out.println("If can select further filters");
+            System.out.println("You can set up additional filtering");
         }
         switch (selectedFilter) {
 
@@ -152,8 +152,14 @@ public class BankAccountController {
             case 4:
                 bankAccountView.showFilterForDate();
                 break;
-
+                
             case 5:
+                filteredTransactions = this.user.getAccount().getListofTransactions();
+                System.out.println("Filtering reseted");
+                bankAccountView.showHistoryOptions();
+                break;    
+
+            case 6:
                 filteredTransactions = this.user.getAccount().getListofTransactions();
                 initView();
                 break;

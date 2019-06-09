@@ -29,9 +29,6 @@ public class BasicBankTransactionProject {
         
         WelcomePageController welcomePageController = WelcomePageController.getInstance();
         welcomePageController.initView();
-        
-        System.out.println(repository.getListOfUsers().get(0).getAccount().getListofTransactions());
-        System.out.println(repository.getListOfUsers().get(1).getAccount().getListofTransactions());
     }
     
 }

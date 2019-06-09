@@ -119,7 +119,8 @@ public class BankAccountView implements IView {
         System.out.println("2. Filter by transaction type");
         System.out.println("3. Filter by amount (range)");
         System.out.println("4. Filter by date");
-        System.out.println("5. Back");
+        System.out.println("5. Reset filter");
+        System.out.println("6. Back");
         System.out.println("------------");
 
         try {
