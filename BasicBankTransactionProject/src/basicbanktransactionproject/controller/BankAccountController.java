@@ -164,10 +164,11 @@ public class BankAccountController {
 
                     if (beneficiaryUser.getAccount().getAccountNumber().compareTo(destinationAccountNumber) == 0) {
                         this.user.getAccount().setBalance(this.user.getAccount().getBalance().subtract(BigDecimal.valueOf(amount)));
-                        beneficiaryUser.getAccount().setBalance(this.user.getAccount().getBalance().add(BigDecimal.valueOf(amount)));
+                        beneficiaryUser.getAccount().setBalance(beneficiaryUser.getAccount().getBalance().add(BigDecimal.valueOf(amount)));
+
                         foundBeneficiaryUser = true;
                         this.user.getAccount().getListofTransactions().add(new Transaction(TransactionType.TRANSFER, BigDecimal.valueOf(amount), this.user.getAccount(), beneficiaryUser.getAccount()));
-                        beneficiaryUser.getAccount().getListofTransactions().add(new Transaction(TransactionType.TRANSFER, BigDecimal.valueOf(amount), beneficiaryUser.getAccount(), this.user.getAccount()));
+                        beneficiaryUser.getAccount().getListofTransactions().add(new Transaction(TransactionType.TRANSFER, BigDecimal.valueOf(amount), this.user.getAccount(), beneficiaryUser.getAccount()));
                         System.out.println("Successful transfer!");
                         bankAccountView.showPage();
                     }
