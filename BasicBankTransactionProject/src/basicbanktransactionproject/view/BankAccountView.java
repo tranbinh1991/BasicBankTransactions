@@ -5,13 +5,13 @@
  */
 package basicbanktransactionproject.view;
 
-import basicbanktransactionproject.model.Transaction;
+
 import basicbanktransactionproject.controller.BankAccountController;
-import basicbanktransactionproject.controller.WelcomePageController;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
-import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -27,7 +27,7 @@ public class BankAccountView implements IView {
     }
 
     @Override
-    public void showPage() {
+    public void showInitialPage() {
 
         System.out.println("------------");
         System.out.println("Welcome " + bankAccountController.getUser().getName());
@@ -50,7 +50,7 @@ public class BankAccountView implements IView {
 
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showPage();
+            showInitialPage();
         }
     }
 

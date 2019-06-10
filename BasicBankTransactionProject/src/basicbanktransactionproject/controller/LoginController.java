@@ -25,7 +25,7 @@ public class LoginController {
     public void showLoginView() {
         view = new LoginView();
         view.setLoginController(this);
-        view.showPage();
+        view.showInitialPage();
 
     }
 

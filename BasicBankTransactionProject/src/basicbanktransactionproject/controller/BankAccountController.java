@@ -5,7 +5,7 @@
  */
 package basicbanktransactionproject.controller;
 
-import basicbanktransactionproject.model.BankAccount;
+
 import basicbanktransactionproject.model.exception.InsufficientFundsException;
 import basicbanktransactionproject.model.exception.NegativeZeroAmountException;
 import basicbanktransactionproject.model.Transaction;
@@ -16,13 +16,13 @@ import basicbanktransactionproject.model.exception.LowerLimitExceedsUpperExcepti
 import basicbanktransactionproject.model.repository.UserRepository;
 import basicbanktransactionproject.view.BankAccountView;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -61,7 +61,7 @@ public class BankAccountController {
                 break;
             default:
                 System.out.println("You have choosen an invalid command. Please try again");
-                bankAccountView.showPage();
+                bankAccountView.showInitialPage();
                 break;
         }
 
@@ -74,7 +74,7 @@ public class BankAccountController {
     public void initView() {
         bankAccountView = new BankAccountView();
         bankAccountView.setController(this);
-        bankAccountView.showPage();
+        bankAccountView.showInitialPage();
     }
 
     public void depositMoney(double amount) {
@@ -121,7 +121,7 @@ public class BankAccountController {
             this.user.getAccount().setBalance(this.user.getAccount().getBalance().subtract(BigDecimal.valueOf(amount)));
             System.out.println("Successful withdraw!. Your new balance is: " + this.user.getAccount().getBalance());
             this.user.getAccount().getListofTransactions().add(new Transaction(TransactionType.WITHDRAWAL, BigDecimal.valueOf(amount), this.user.getAccount(), null));
-            bankAccountView.showPage();
+            bankAccountView.showInitialPage();
         }
     }
 
@@ -170,7 +170,7 @@ public class BankAccountController {
                         this.user.getAccount().getListofTransactions().add(new Transaction(TransactionType.TRANSFER, BigDecimal.valueOf(amount), this.user.getAccount(), beneficiaryUser.getAccount()));
                         beneficiaryUser.getAccount().getListofTransactions().add(new Transaction(TransactionType.TRANSFER, BigDecimal.valueOf(amount), this.user.getAccount(), beneficiaryUser.getAccount()));
                         System.out.println("Successful transfer!");
-                        bankAccountView.showPage();
+                        bankAccountView.showInitialPage();
                     }
                 }
 
@@ -219,12 +219,12 @@ public class BankAccountController {
 
             case 6:
                 filteredTransactions = this.user.getAccount().getListofTransactions();
-                bankAccountView.showPage();
+                bankAccountView.showInitialPage();
                 break;
 
             default:
                 System.out.println("You have choosen an invalid command. Please try again");
-                bankAccountView.showPage();
+                bankAccountView.showInitialPage();
                 break;
         }
     }

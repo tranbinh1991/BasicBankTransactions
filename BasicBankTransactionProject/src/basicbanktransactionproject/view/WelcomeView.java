@@ -24,7 +24,7 @@ public class WelcomeView implements IView{
 
 
     @Override
-    public void showPage() {
+    public void showInitialPage() {
         
         System.out.println("------------");
         System.out.println("Welcome to our NetBank");
@@ -43,7 +43,7 @@ public class WelcomeView implements IView{
 
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showPage();
+            showInitialPage();
         }
     }
 

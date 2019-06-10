@@ -6,7 +6,7 @@
 package basicbanktransactionproject.view;
 
 import basicbanktransactionproject.controller.RegistrationController;
-import basicbanktransactionproject.controller.WelcomePageController;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ public class RegistrationView implements IView{
 
 
     @Override
-    public void showPage() {
+    public void showInitialPage() {
         
         System.out.println("------------");
         System.out.println("Registration");
@@ -42,7 +42,7 @@ public class RegistrationView implements IView{
             this.registrationController.registerNewUser(userName, password);
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showPage();
+            showInitialPage();
         }
     }
 

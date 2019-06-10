@@ -10,7 +10,7 @@ package basicbanktransactionproject.view;
  * @author Binh
  */
 public interface IView {
-    public void showPage();
+    public void showInitialPage();
     public void showErrorMessage(String message);
     
 }

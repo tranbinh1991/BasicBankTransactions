@@ -7,7 +7,7 @@ package basicbanktransactionproject.controller;
 
 import basicbanktransactionproject.model.User;
 import basicbanktransactionproject.model.repository.UserRepository;
-import basicbanktransactionproject.view.IView;
+
 import basicbanktransactionproject.view.RegistrationView;
 
 /**
@@ -34,21 +34,21 @@ public class RegistrationController {
     public void showRegistrationView() {
         view = new RegistrationView();
         view.setRegistrationController(this);
-        view.showPage();
+        view.showInitialPage();
 
     }
 
     public void registerNewUser(String name, String password) {
         boolean usernameAlreadyExists = false;
-        
+
         for (User user : users.getListOfUsers()) {
-            if (user.getName().equals(name)){
+            if (user.getName().equals(name)) {
                 usernameAlreadyExists = true;
             }
         }
-        if (usernameAlreadyExists==true) {
+        if (usernameAlreadyExists == true) {
             System.out.println("This username is already taken");
-            view.showPage();
+            view.showInitialPage();
         } else {
             User user = new User(name, password);
             users.getListOfUsers().add(user);

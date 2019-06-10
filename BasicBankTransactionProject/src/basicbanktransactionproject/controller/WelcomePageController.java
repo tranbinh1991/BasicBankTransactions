@@ -11,7 +11,7 @@ import basicbanktransactionproject.view.WelcomeView;
  *
  * @author Binh
  */
-public class WelcomePageController {
+public class WelcomePageController{
 
     WelcomeView welcomePageView;
 
@@ -43,7 +43,7 @@ public class WelcomePageController {
                 break;
             default:
                 System.out.println("You have choosen an invalid command. Please try again");
-                welcomePageView.showPage();
+                welcomePageView.showInitialPage();
                 break;
 
         }
@@ -52,7 +52,7 @@ public class WelcomePageController {
     public void initView() {
         welcomePageView = new WelcomeView();
         welcomePageView.setWelcomePageController(this);
-        welcomePageView.showPage();
+        welcomePageView.showInitialPage();
     }
 
 }
