@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basicbanktransactionproject.model;
+package basicbanktransactionproject.model.repository;
 
+import basicbanktransactionproject.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,12 @@ import java.util.List;
  *
  * @author Binh
  */
-public class TransactionRepository {
-    private List<Transaction> listOfTransactions = new ArrayList<>();
+public class UserRepository {
+    private static List<User> listOfUsers = new ArrayList<>();
 
-    public List<Transaction> getListOfTransactions() {
-        return listOfTransactions;
+    public List<User> getListOfUsers() {
+        return listOfUsers;
     }
+    
 
 }

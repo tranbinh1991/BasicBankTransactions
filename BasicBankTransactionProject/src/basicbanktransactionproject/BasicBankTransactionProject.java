@@ -6,7 +6,7 @@
 package basicbanktransactionproject;
 
 import basicbanktransactionproject.model.User;
-import basicbanktransactionproject.model.UserRepository;
+import basicbanktransactionproject.model.repository.UserRepository;
 import basicbanktransactionproject.model.controller.WelcomePageController;
 import basicbanktransactionproject.view.WelcomeView;
 

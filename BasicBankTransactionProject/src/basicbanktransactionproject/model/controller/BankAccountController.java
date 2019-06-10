@@ -6,12 +6,13 @@
 package basicbanktransactionproject.model.controller;
 
 import basicbanktransactionproject.model.BankAccount;
-import basicbanktransactionproject.model.InsufficientFundsException;
-import basicbanktransactionproject.model.NegativeAmountException;
+import basicbanktransactionproject.model.exeption.InsufficientFundsException;
+import basicbanktransactionproject.model.exeption.NegativeAmountException;
 import basicbanktransactionproject.model.Transaction;
 import basicbanktransactionproject.model.TransactionType;
 import basicbanktransactionproject.model.User;
-import basicbanktransactionproject.model.UserRepository;
+import basicbanktransactionproject.model.exeption.InvalidAccountNumberException;
+import basicbanktransactionproject.model.repository.UserRepository;
 import basicbanktransactionproject.view.BankAccountView;
 
 import java.math.BigDecimal;
@@ -79,9 +80,9 @@ public class BankAccountController {
 
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(amount);
+                throw new NegativeAmountException(BigDecimal.valueOf(amount));
             } catch (NegativeAmountException ex) {
-                ex.message();
+                ex.sendMessage();
             } finally {
                 bankAccountView.showDespositOption();
             }
@@ -97,9 +98,9 @@ public class BankAccountController {
     public void withdrawMoney(double amount) {
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(amount);
+                throw new NegativeAmountException(BigDecimal.valueOf(amount));
             } catch (NegativeAmountException ex) {
-                ex.message();
+                ex.sendMessage();
             } finally {
                 bankAccountView.showWithdrawOption();
             }
@@ -108,9 +109,9 @@ public class BankAccountController {
         if (this.user.getAccount().getBalance().compareTo(BigDecimal.valueOf(amount)) <= 0) {
 
             try {
-                throw new InsufficientFundsException(amount);
+                throw new InsufficientFundsException(BigDecimal.valueOf(amount), user.getAccount().getBalance());
             } catch (InsufficientFundsException ex) {
-                ex.message();
+                ex.sendMessage();
             } finally {
                 bankAccountView.showWithdrawOption();
             }
@@ -127,9 +128,9 @@ public class BankAccountController {
 
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(amount);
+                throw new NegativeAmountException(BigDecimal.valueOf(amount));
             } catch (NegativeAmountException ex) {
-                ex.message();
+                ex.sendMessage();
             } finally {
                 bankAccountView.showTransferOption();
             }
@@ -138,17 +139,24 @@ public class BankAccountController {
         if (this.user.getAccount().getBalance().compareTo(BigDecimal.valueOf(amount)) <= 0) {
 
             try {
-                throw new InsufficientFundsException(amount);
+                 throw new InsufficientFundsException(BigDecimal.valueOf(amount), user.getAccount().getBalance());
             } catch (InsufficientFundsException ex) {
-                ex.message();
+                ex.sendMessage();
             } finally {
                 bankAccountView.showTransferOption();
+
             }
         } else {
 
             if (destinationAccountNumber.compareTo(this.user.getAccount().getAccountNumber()) == 0) {
-                System.out.println("You cannot deposit to yourself");
-                bankAccountView.showTransferOption();
+                try {
+                    throw new InvalidAccountNumberException(destinationAccountNumber);
+                } catch (InvalidAccountNumberException ex) {
+                    ex.sendMessageAccountNumberSameWithSender();
+                } finally {
+                    bankAccountView.showTransferOption();
+                }
+
             } else {
                 boolean foundBeneficiaryUser = false;
                 for (User beneficiaryUser : users.getListOfUsers()) {
@@ -165,8 +173,13 @@ public class BankAccountController {
                 }
 
                 if (foundBeneficiaryUser == false) {
-                    System.out.println("Account number not found");
-                    bankAccountView.showTransferOption();
+                    try {
+                        throw new InvalidAccountNumberException(destinationAccountNumber);
+                    } catch (InvalidAccountNumberException ex) {
+                        ex.sendMessageAccountNumberCannotBeFound();
+                    } finally {
+                        bankAccountView.showTransferOption();
+                    }
                 }
             }
         }
