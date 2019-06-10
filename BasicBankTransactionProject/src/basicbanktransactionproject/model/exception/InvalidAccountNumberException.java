@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basicbanktransactionproject.model.exeption;
+package basicbanktransactionproject.model.exception;
 
 /**
  *
@@ -18,11 +18,11 @@ public class InvalidAccountNumberException extends Exception {
     }
 
     public void sendMessageAccountNumberCannotBeFound() {
-        System.out.println("The account number you want to transfer does not exists"+ accountnumber);
+        System.out.println("The account number you want to transfer does not exists: "+ accountnumber);
     }
 
     public void sendMessageAccountNumberSameWithSender() {
-        System.out.println("The account number you want to transfer it your own"+ accountnumber);
+        System.out.println("The account number you want to transfer it your own: "+ accountnumber);
     }
 
     public double getAccountNumber() {

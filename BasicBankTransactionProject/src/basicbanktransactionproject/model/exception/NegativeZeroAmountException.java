@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basicbanktransactionproject.model.exeption;
+package basicbanktransactionproject.model.exception;
 
 import java.math.BigDecimal;
 
@@ -11,17 +11,17 @@ import java.math.BigDecimal;
  *
  * @author Binh
  */
-public class NegativeAmountException extends Exception{
+public class NegativeZeroAmountException extends Exception{
     
    private BigDecimal amount;
 
-    public NegativeAmountException(BigDecimal amount) {
+    public NegativeZeroAmountException(BigDecimal amount) {
         
         this.amount = amount;
     }
     
     public void sendMessage (){
-        System.out.println("You cannot enter negative amount: " + amount);
+        System.out.println("You cannot enter negative or zero amount: " + amount);
     }
 
     public BigDecimal getAmount() {

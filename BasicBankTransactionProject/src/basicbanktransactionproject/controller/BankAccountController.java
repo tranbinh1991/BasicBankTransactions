@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basicbanktransactionproject.model.controller;
+package basicbanktransactionproject.controller;
 
 import basicbanktransactionproject.model.BankAccount;
-import basicbanktransactionproject.model.exeption.InsufficientFundsException;
-import basicbanktransactionproject.model.exeption.NegativeAmountException;
+import basicbanktransactionproject.model.exception.InsufficientFundsException;
+import basicbanktransactionproject.model.exception.NegativeZeroAmountException;
 import basicbanktransactionproject.model.Transaction;
 import basicbanktransactionproject.model.TransactionType;
 import basicbanktransactionproject.model.User;
-import basicbanktransactionproject.model.exeption.InvalidAccountNumberException;
+import basicbanktransactionproject.model.exception.InvalidAccountNumberException;
+import basicbanktransactionproject.model.exception.LowerLimitExceedsUpperException;
 import basicbanktransactionproject.model.repository.UserRepository;
 import basicbanktransactionproject.view.BankAccountView;
 
@@ -80,8 +81,8 @@ public class BankAccountController {
 
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(BigDecimal.valueOf(amount));
-            } catch (NegativeAmountException ex) {
+                throw new NegativeZeroAmountException(BigDecimal.valueOf(amount));
+            } catch (NegativeZeroAmountException ex) {
                 ex.sendMessage();
             } finally {
                 bankAccountView.showDespositOption();
@@ -98,8 +99,8 @@ public class BankAccountController {
     public void withdrawMoney(double amount) {
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(BigDecimal.valueOf(amount));
-            } catch (NegativeAmountException ex) {
+                throw new NegativeZeroAmountException(BigDecimal.valueOf(amount));
+            } catch (NegativeZeroAmountException ex) {
                 ex.sendMessage();
             } finally {
                 bankAccountView.showWithdrawOption();
@@ -128,8 +129,8 @@ public class BankAccountController {
 
         if (amount <= 0) {
             try {
-                throw new NegativeAmountException(BigDecimal.valueOf(amount));
-            } catch (NegativeAmountException ex) {
+                throw new NegativeZeroAmountException(BigDecimal.valueOf(amount));
+            } catch (NegativeZeroAmountException ex) {
                 ex.sendMessage();
             } finally {
                 bankAccountView.showTransferOption();
@@ -139,7 +140,7 @@ public class BankAccountController {
         if (this.user.getAccount().getBalance().compareTo(BigDecimal.valueOf(amount)) <= 0) {
 
             try {
-                 throw new InsufficientFundsException(BigDecimal.valueOf(amount), user.getAccount().getBalance());
+                throw new InsufficientFundsException(BigDecimal.valueOf(amount), user.getAccount().getBalance());
             } catch (InsufficientFundsException ex) {
                 ex.sendMessage();
             } finally {
@@ -245,6 +246,18 @@ public class BankAccountController {
     }
 
     public List<Transaction> filterByAmount(List<Transaction> list, double lowerLimit, double upperLimit) {
+        if (lowerLimit > upperLimit) {
+            try {
+                throw new LowerLimitExceedsUpperException(BigDecimal.valueOf(lowerLimit), BigDecimal.valueOf(upperLimit));
+
+            } catch (LowerLimitExceedsUpperException ex) {
+                ex.sendMessageForAmount();
+            } finally {
+                bankAccountView.showFilterForAmount();
+            }
+
+        }
+
         List<Transaction> newFilteredTransactions = new ArrayList<>();
         for (Transaction transaction : list) {
             if (transaction.getValue().compareTo(BigDecimal.valueOf(lowerLimit)) >= 0 && transaction.getValue().compareTo(BigDecimal.valueOf(upperLimit)) <= 0) {
@@ -262,6 +275,17 @@ public class BankAccountController {
     }
 
     public List<Transaction> filterByDate(List<Transaction> list, LocalDate lowerLimit, LocalDate upperLimit) {
+        if (lowerLimit.isAfter(upperLimit)) {
+            try {
+                throw new LowerLimitExceedsUpperException(lowerLimit, upperLimit);
+            } catch (LowerLimitExceedsUpperException ex) {
+                ex.sendMessageForDate();
+            } finally {
+                bankAccountView.showFilterForDate();
+            }
+
+        }
+
         List<Transaction> newFilteredTransactions = new ArrayList<>();
         for (Transaction transaction : list) {
 

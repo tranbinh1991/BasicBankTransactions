@@ -5,7 +5,7 @@
  */
 package basicbanktransactionproject.view;
 
-import basicbanktransactionproject.model.controller.WelcomePageController;
+import basicbanktransactionproject.controller.WelcomePageController;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

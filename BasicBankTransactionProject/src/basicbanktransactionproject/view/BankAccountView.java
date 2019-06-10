@@ -6,8 +6,8 @@
 package basicbanktransactionproject.view;
 
 import basicbanktransactionproject.model.Transaction;
-import basicbanktransactionproject.model.controller.BankAccountController;
-import basicbanktransactionproject.model.controller.WelcomePageController;
+import basicbanktransactionproject.controller.BankAccountController;
+import basicbanktransactionproject.controller.WelcomePageController;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
@@ -88,7 +88,7 @@ public class BankAccountView implements IView {
 
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showDespositOption();
+            showWithdrawOption();
         }
 
     }
@@ -106,7 +106,7 @@ public class BankAccountView implements IView {
 
         } catch (InputMismatchException e) {
             showErrorMessage("Invalid Input. Please try again");
-            showDespositOption();
+            showTransferOption();
         }
 
     }
